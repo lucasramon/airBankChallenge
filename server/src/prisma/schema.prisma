@@ -1,0 +1,36 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Transaction {
+  id        String  @id @default(cuid())
+  amount    String
+  currency  String  @db.VarChar(255)
+  reference String? @db.VarChar(255)
+  date      String
+  accountId  String
+  categoryId String?
+
+
+  @@map(name: "transaction")
+}
+
+model Account {
+  id   String @id @default(cuid())
+  name String @db.VarChar(500)
+
+  @@map(name: "account")
+}
+
+model Category {
+  id    String @id @default(cuid())
+  name  String @db.VarChar(500)
+  color String @db.VarChar(500)
+
+  @@map(name: "category")
+}

@@ -3,7 +3,8 @@ export const generateRequestQuery = (query: any) => {
 
     const { take, skip } = query.query.pagination;
     const { orderBy, sort } = query.query.sort;
-    const queryParameters = [query.query.queryForm]
+    const queryParameters: Array<Object> = Object.entries(query.query.queryForm).map(([key, value]) => ({ [key]: value }));
+    ;
 
     const whereObject = generateWhereObject(queryParameters);
 
@@ -19,16 +20,15 @@ export const generateRequestQuery = (query: any) => {
         }
     }
 
+
     return result
 }
 
 
 const generateWhereObject = (queryParameters: Array<Object>) => {
-
     let whereAndArray: Array<Object> = [];
     for (let parameter of queryParameters) {
         if (!parameter) continue
-
         const parameterKey = Object.keys(parameter)[0];
         const parameterValue = Object.values(parameter)[0];
         if (parameterKey === "startMonth" || parameterKey === "endMonth") {
@@ -52,7 +52,7 @@ const handleDatesParamaters = (dateParameterKey: string, dateParameterValue: str
 
     if (dateParameterKey === "startMonth") {
         whereAndArray.push({
-            [dateParameterKey]: {
+            date: {
                 gte: dateParameterValue
             }
         })
@@ -60,7 +60,7 @@ const handleDatesParamaters = (dateParameterKey: string, dateParameterValue: str
 
     if (dateParameterKey === "endMonth") {
         whereAndArray.push({
-            [dateParameterKey]: {
+            date: {
                 lte: dateParameterValue
             }
         })

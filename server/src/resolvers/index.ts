@@ -6,7 +6,6 @@ import Transaction from "../interfaces/transaction";
 import Category from "../interfaces/category";
 import Account from "../interfaces/account";
 
-
 const Transaction = {
     id: (parent: Transaction, args: Transaction) => parent.id,
     amount: (parent: Transaction) => parent.amount,

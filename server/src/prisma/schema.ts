@@ -6,7 +6,7 @@ const typeDefs = gql`
 
   type Transaction {
     id: ID!
-    amount: String!
+    amount: Int!
     currency: String!
     reference: String
     accountId: String

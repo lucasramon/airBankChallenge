@@ -2,9 +2,9 @@ import { PrismaClient } from "@prisma/client";
 import { parseCSV } from "../utils/parseCSV";
 const prisma = new PrismaClient();
 
-const transactionData = parseCSV('transactions.csv');
-const accountData = parseCSV('accounts.csv');
-const categoryData = parseCSV('categories.csv');
+const transactionData = parseCSV('transactions.csv', true);
+const accountData = parseCSV('accounts.csv',false);
+const categoryData = parseCSV('categories.csv',false);
 
 
 const seed = async () => {
@@ -25,7 +25,9 @@ const seed = async () => {
 
     await prisma.transaction.createMany({
         data: transactionData
+
     });
+
 
 }
 

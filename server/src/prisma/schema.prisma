@@ -8,11 +8,11 @@ generator client {
 }
 
 model Transaction {
-  id        String  @id @default(cuid())
-  amount    String
-  currency  String  @db.VarChar(255)
-  reference String? @db.VarChar(255)
-  date      String
+  id         String   @id @default(cuid())
+  amount     Float
+  currency   String   @db.VarChar(255)
+  reference  String?  @db.VarChar(255)
+  date       DateTime @default(now())
   accountId  String
   categoryId String?
 

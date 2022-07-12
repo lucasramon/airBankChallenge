@@ -1,4 +1,3 @@
-import Transaction from "./transaction";
 
 interface Category {
     id:number,

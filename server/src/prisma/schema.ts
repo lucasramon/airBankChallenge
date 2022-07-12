@@ -26,12 +26,35 @@ const typeDefs = gql`
   }
 
   type Query {
-    transactions: [Transaction!]
+    transactions(query:RequestQuery): [Transaction!]
     transaction(id: ID!): Transaction
     accounts: [Account!]!
     account(id: ID!): Account
     categories: [Category!]!
     category(id: ID!): Category
+  }
+
+  input Pagination {
+    take: Int!
+    skip: Int!
+  }
+
+  input QueryForm{
+    startMonth: String
+    endMonth: String
+    accountId: String
+  }
+
+  input Sorting{
+    orderBy: String!
+    sort: String!
+  }
+
+  input RequestQuery {
+    pagination: Pagination!
+    queryForm: QueryForm
+    sort: Sorting!
+
   }
 
 `

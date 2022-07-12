@@ -4,34 +4,47 @@ import prisma from "../prisma/database";
 import Transaction from "../interfaces/transaction";
 import Category from "../interfaces/category";
 import Account from "../interfaces/account";
+import { generateRequestQuery } from "../utils/generateRequestQuery";
 const Query = {
-    transaction: (args: Transaction) => {
-        return prisma.transaction.findFirst({
-            where: { id: Number(args.id) },
+    transaction: async (args: Transaction) => {
+        const result: Transaction = await prisma.transaction.findFirst({
+            where: { id: args.id },
         });
+        return result
     },
 
-    transactions: (args: Transaction) => {
-        return prisma.transaction.findMany({});
+    transactions: async (args: Transaction, query:any) => {
+        const formedQuery = generateRequestQuery(query);
+        const result: Array<Transaction> = prisma.transaction.findMany(formedQuery);
+        return result
     },
 
-    account: (args: Account) => {
-        return prisma.account.findFirst({
-            where: { id: Number(args.id) },
+    account: async (args: Account) => {
+        const result: Account = await prisma.account.findFirst({
+            where: { id: args.id },
         });
+
+        return result
     },
 
-    accounts: (args: Account) => {
-        return prisma.account.findMany({});
-    },
+    accounts: async (args: Account) => {
+        const result: Array<Account> = await prisma.account.findMany({
 
-    category: (args: Category) => {
-        return prisma.category.findFirst({
-            where: { id: Number(args.id) },
         });
+        return result
+
     },
-    categories: (args: Category) => {
-        return prisma.category.findMany({});
+
+    category: async (args: Category) => {
+        const result: Category = await prisma.category.findFirst({
+            where: { id: args.id },
+        });
+
+        return result
+    },
+    categories: async (args: Category) => {
+        const result: Array<Category> = await prisma.category.findMany({});
+        return result
     },
 
 

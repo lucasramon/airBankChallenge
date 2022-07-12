@@ -5,6 +5,7 @@ import Transaction from "../interfaces/transaction";
 import Category from "../interfaces/category";
 import Account from "../interfaces/account";
 import { generateRequestQuery } from "../utils/generateRequestQuery";
+import RequestQuery from "../interfaces/requestQuery";
 const Query = {
     transaction: async (args: Transaction) => {
         const result: Transaction = await prisma.transaction.findFirst({
@@ -13,7 +14,7 @@ const Query = {
         return result
     },
 
-    transactions: async (args: Transaction, query:any) => {
+    transactions: async (args: Transaction, query:RequestQuery) => {
         const formedQuery = generateRequestQuery(query);
         const result: Array<Transaction> = await prisma.transaction.findMany(formedQuery);
         console.log(result)

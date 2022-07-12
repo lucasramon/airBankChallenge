@@ -1,10 +1,13 @@
-
-export const generateRequestQuery = (query: any) => {
+import Pagination from '../interfaces/pagination';
+import QueryForm from '../interfaces/queryForm';
+import Sorting from '../interfaces/sorting';
+import requestQuery from './../interfaces/requestQuery'
+export const generateRequestQuery = (query: requestQuery) => {
 
     const { take, skip } = query.query.pagination;
     const { orderBy, sort } = query.query.sort;
-    const queryParameters: Array<Object> = Object.entries(query.query.queryForm).map(([key, value]) => ({ [key]: value }));
-    ;
+    const queryParameters = Object.entries(query.query.queryForm).map(([key, value]) => ({ [key]: value }));
+
 
     const whereObject = generateWhereObject(queryParameters);
 

@@ -17,7 +17,6 @@ const Query = {
     transactions: async (args: Transaction, query:RequestQuery) => {
         const formedQuery = generateRequestQuery(query);
         const result: Array<Transaction> = await prisma.transaction.findMany(formedQuery);
-        console.log(result)
         return result
     },
 

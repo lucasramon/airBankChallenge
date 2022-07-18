@@ -1,6 +1,5 @@
 //* node-graphql-lesson-04/src/resolvers/index.js
 
-import prisma from "../prisma/database";
 import Query from "./query";
 import Transaction from "../interfaces/transaction";
 import Category from "../interfaces/category";
@@ -11,7 +10,7 @@ const Transaction = {
     amount: (parent: Transaction) => parent.amount,
     currency: (parent: Transaction) => parent.currency,
     reference: (parent: Transaction) => parent.reference,
-    date: (parent: Transaction) => parent.date,
+    date: (parent: Transaction) => parent.date.toISOString(),
 
 }
 
